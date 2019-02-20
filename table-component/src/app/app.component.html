@@ -1,0 +1,18 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Welcome to {{title}}</h1>
+    <p class="lead">Data helper text</p>
+    <hr class="my-2">
+    <p>More info</p>
+
+    <app-table [data]="data" threadType="dark" > 
+      <table-column label="#" property="id" ></table-column>  
+      <table-column label="Código" property="codigo" ></table-column>  
+      <table-column label="Nome" property="nome" ></table-column>
+      <table-column label="Qtde" property="qtde" ></table-column>
+      <table-column label="Conta Corrente" property="cc" ></table-column>
+      <table-column label="Custodiante" property="custodiante.nome" ></table-column>  
+    </app-table>
+
+  </div>
+</div>

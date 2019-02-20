@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="{{getThreadClass()}}">
+      <tr>
+        <th *ngFor="let column of columns" scope="col">{{column.label}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data" >
+        <td *ngFor="let column of columns">{{getProperty(item, column.property)}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" (click)="testData()" href="#" role="button">Test senda data!</a>
+  </p>
+  
+</div>
+  
+
+  
