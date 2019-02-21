@@ -5,7 +5,11 @@
     <hr class="my-2">
     <p>More info</p>
 
-    <app-table [data]="data" threadType="dark" > 
+    <app-table 
+              [data]="data" 
+              threadType="dark" 
+              [hasCheckbox]="true"
+              (selectedLine)="onSelected($event)" > 
       <table-column label="#" property="id" ></table-column>  
       <table-column label="Código" property="codigo" ></table-column>  
       <table-column label="Nome" property="nome" ></table-column>

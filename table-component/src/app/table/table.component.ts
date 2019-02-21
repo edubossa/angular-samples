@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { getQueryValue } from '@angular/core/src/view/query';
 
 export enum TheadType {
-  empty = "",
-  dark = "thead-dark",
-  light = "thead-light"
+  empty = '',
+  dark = 'thead-dark',
+  light = 'thead-light'
 }
 
 @Component({
@@ -17,11 +17,19 @@ export class TableComponent implements OnInit {
 
   @Input()
   data: Array<any>;
-  
+
   @Input()
   threadType: string;
 
+  @Input()
+  hasCheckbox: false;
+
+  @Output()
+  selectedLine = new EventEmitter;
+
   columns: TableColumnComponent[] = [];
+
+  itemsChecked: any[] = [];
 
   constructor() { }
 
@@ -33,7 +41,7 @@ export class TableComponent implements OnInit {
   }
 
   getProperty(item: any, property: string): string {
-    let propertyArray = property.split('.');
+    const propertyArray = property.split('.');
     let value = item;
     for (let i = 0; i < propertyArray.length; i++) {
 
@@ -47,9 +55,9 @@ export class TableComponent implements OnInit {
     return value;
   }
 
-  
+
   getThreadClass(): string {
-    for (var enumMember in TheadType) {
+    for (const enumMember in TheadType) {
       if (this.threadType == enumMember) {
         return TheadType[enumMember];
       }
@@ -57,8 +65,17 @@ export class TableComponent implements OnInit {
     return TheadType.empty;
   }
 
+  selectItem(item: any) {
+    this.selectedLine.emit(item);
+  }
+
+  // TODO Enviar Event Emitter - e remover o item caso desmarcado ou seja se ja foi adicionado remove se nao adiciona.
+  checkItem(item: any) {
+    this.itemsChecked.push(item);
+  }
+
   testData() {
-    console.log(JSON.stringify(this.data));
+    console.log('ITEMS CHECKED' + JSON.stringify(this.itemsChecked));
   }
 
 }
