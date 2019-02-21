@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { TableColumnComponent } from './table-column/table-column.component';
-import { getQueryValue } from '@angular/core/src/view/query';
+import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 
 export enum TheadType {
   empty = '',
@@ -25,13 +25,20 @@ export class TableComponent implements OnInit {
   hasCheckbox: false;
 
   @Output()
-  selectedLine = new EventEmitter;
+  lineEvent = new EventEmitter;
 
   columns: TableColumnComponent[] = [];
 
   itemsChecked: any[] = [];
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { // TODO REMOVER
+
+    this.form = this.formBuilder.group({
+      items: new FormArray([])
+    });  
+  }
 
   ngOnInit() {
   }
@@ -65,13 +72,19 @@ export class TableComponent implements OnInit {
     return TheadType.empty;
   }
 
+  //https://stackoverflow.com/questions/5767325/how-do-i-remove-a-particular-element-from-an-array-in-javascript
   selectItem(item: any) {
-    this.selectedLine.emit(item);
-  }
+    document.getElementById(item.id).checked = !document.getElementById(item.id).checked;
+    
+    let filter = this.itemsChecked.filter(value => value == item.id);
 
-  // TODO Enviar Event Emitter - e remover o item caso desmarcado ou seja se ja foi adicionado remove se nao adiciona.
-  checkItem(item: any) {
-    this.itemsChecked.push(item);
+    if (filter.length > 0) {
+      this.itemsChecked.slice(item.id);
+    } else {
+      this.itemsChecked.push(item.id);
+    }
+    
+    this.lineEvent.emit(item);
   }
 
   testData() {

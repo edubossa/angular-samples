@@ -9,7 +9,7 @@
               [data]="data" 
               threadType="dark" 
               [hasCheckbox]="true"
-              (selectedLine)="onSelected($event)" > 
+              (lineEvent)="onSelected($event)" > 
       <table-column label="#" property="id" ></table-column>  
       <table-column label="Código" property="codigo" ></table-column>  
       <table-column label="Nome" property="nome" ></table-column>

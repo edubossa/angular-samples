@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'table-component';
+  title = 'Table Component';
 
   data = [
     {'id' : 1, 'codigo' : 'PETR4', 'nome' : 'PETROBRAS PN', 'qtde' : '10.000', 'cc' : 'CC/2565/654215-9', 'custodiante' : { 'nome' :  'CUST-01'} },
@@ -18,7 +18,7 @@ export class AppComponent {
 
 
   onSelected(line) {
-    console.log(JSON.stringify(line));
+    // console.log(JSON.stringify(line));
   }
 
 
