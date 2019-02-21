@@ -1,0 +1,37 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Welcome to Control Pay!</h1>
+    <p class="lead">Enter with your Credit Cart, Please!</p>
+    <hr class="my-2">
+
+    <div class="card-deck col-6">
+      <div class="card">
+          <pre>{{ form.value |  json }}</pre>
+      </div>
+    </div>
+
+    <br>
+    
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Creditcard</label>
+          <div class="input-group mb-2">
+            <input type="text" formControlName="card" class="form-control" id="inlineFormInputGroup" placeholder="Creditcard">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <img ccLogo [cartNumber]='form.value.card' width="40" height="25" >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+</div>
+
+<router-outlet></router-outlet>

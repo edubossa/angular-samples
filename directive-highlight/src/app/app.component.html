@@ -1,0 +1,19 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <p [appHighlight]="'yellow'">Highlighted in yellow</p>
+  <p [appHighlight]="'orange'">Highlighted in orange</p>
+  <p [appHighlight]="" defaultColor="violet">Highlighted in default</p>
+
+  <h1>My First Attribute Directive</h1>
+
+  <div>
+    <input id="lightgreen" type="radio" name="colors" (click)="color='lightgreen'"><label for="lightgreen">Green</label>
+    <input id="yellow" type="radio" name="colors" (click)="color='yellow'"><label for="yellow">Yellow</label>
+    <input id="cyan" type="radio" name="colors" (click)="color='cyan'"><label for="cyan">Cyan</label>
+  </div>
+
+  <h1 [appHighlight]="color" defaultColor="pink">Highlighted me!</h1>
+
+</div>
+
+<router-outlet></router-outlet>
