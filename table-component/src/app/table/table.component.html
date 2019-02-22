@@ -1,33 +1,33 @@
-<form [formGroup]="form">
+<div class="table-responsive">
+  <table class="table table-hover" #table>
+  <thead class="{{getThreadClass()}}">
+    <tr>
+      <th *ngIf="hasCheckbox"></th>
+      <th *ngFor="let column of columns" scope="col">{{column.label}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data; let i = index" (click)="selectItem(item, i)">
+      <td *ngIf="hasCheckbox"> 
+        <div class="custom-control custom-checkbox mb-3">
+          <input type="checkbox" class="custom-control-input" id="{{getItemToCheck(item)}}">
+          <label class="custom-control-label" for="{{item.id}}">&nbsp;</label> 
+        </div>
+      </td>
+      <td *ngFor="let column of columns">{{getProperty(item, column.property)}}</td>
+    </tr>
+  </tbody>
+  </table>
+
+  <p class="lead">
+  <a class="btn btn-primary btn-lg" (click)="testData()" href="#" role="button">Test senda data!</a>
+  </p>
+
+</div>
+
 
   
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <thead class="{{getThreadClass()}}">
-        <tr>
-          <th *ngIf="hasCheckbox"></th>
-          <th *ngFor="let column of columns" scope="col">{{column.label}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of data; let i = index" (click)="selectItem(item)" >
-          <td *ngIf="hasCheckbox"> 
-            <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input" id="{{item.id}}">
-              <label class="custom-control-label" for="{{item.id}}">&nbsp;</label> 
-            </div>
-          </td>
-          <td *ngFor="let column of columns">{{getProperty(item, column.property)}}</td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" (click)="testData()" href="#" role="button">Test senda data!</a>
-    </p>
-    
-  </div>
   
-</form>
+
   
     

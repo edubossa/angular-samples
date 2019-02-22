@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { TableColumnComponent } from './table-column/table-column.component';
-import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 
 export enum TheadType {
   empty = '',
@@ -31,13 +30,10 @@ export class TableComponent implements OnInit {
 
   itemsChecked: any[] = [];
 
-  form: FormGroup;
+  @ViewChild('table')
+  el: ElementRef;
 
-  constructor(private formBuilder: FormBuilder) { // TODO REMOVER
-
-    this.form = this.formBuilder.group({
-      items: new FormArray([])
-    });  
+  constructor() {
   }
 
   ngOnInit() {
@@ -72,19 +68,34 @@ export class TableComponent implements OnInit {
     return TheadType.empty;
   }
 
-  //https://stackoverflow.com/questions/5767325/how-do-i-remove-a-particular-element-from-an-array-in-javascript
-  selectItem(item: any) {
-    document.getElementById(item.id).checked = !document.getElementById(item.id).checked;
-    
-    let filter = this.itemsChecked.filter(value => value == item.id);
-
-    if (filter.length > 0) {
-      this.itemsChecked.slice(item.id);
-    } else {
-      this.itemsChecked.push(item.id);
-    }
-    
+  selectItem(item: any, index) {
+    this.addItemToCheckList(item, index);
     this.lineEvent.emit(item);
+  }
+
+  addItemToCheckList(item: any, index) {
+
+    if (!this.hasCheckbox) {
+      return;
+    }
+
+    // alter color line of table when selected
+    this.el.nativeElement.rows[index + 1].style.backgroundColor =
+      this.el.nativeElement.rows[index + 1].style.backgroundColor === 'rgb(165, 214, 167)' ? 'transparent' : 'rgb(165, 214, 167)';
+
+    document.getElementById(this.getItemToCheck(item)).checked = !document.getElementById(this.getItemToCheck(item)).checked;
+    const filter = this.itemsChecked.filter(value => value === this.getItemToCheck(item));
+    if (filter.length > 0) {
+      const index = this.itemsChecked.indexOf(this.getItemToCheck(item));
+      this.itemsChecked.splice(index, 1); // Indice inicial e a quantidade de elementos a ser removido
+    } else {
+      this.itemsChecked.push(this.getItemToCheck(item));
+    }
+
+  }
+
+  getItemToCheck(item: any) {
+    return this.getProperty(item, this.columns[0].property);
   }
 
   testData() {

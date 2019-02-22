@@ -18,7 +18,7 @@ export class AppComponent {
 
 
   onSelected(line) {
-    // console.log(JSON.stringify(line));
+    console.log(JSON.stringify(line));
   }
 
 
