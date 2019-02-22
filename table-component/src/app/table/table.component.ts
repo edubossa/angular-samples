@@ -33,6 +33,8 @@ export class TableComponent implements OnInit {
   @ViewChild('table')
   el: ElementRef;
 
+  checkElement: HTMLInputElement;
+
   constructor() {
   }
 
@@ -72,7 +74,7 @@ export class TableComponent implements OnInit {
     this.addItemToCheckList(item, index);
     this.lineEvent.emit(item);
   }
-
+  
   addItemToCheckList(item: any, index) {
 
     if (!this.hasCheckbox) {
@@ -83,7 +85,10 @@ export class TableComponent implements OnInit {
     this.el.nativeElement.rows[index + 1].style.backgroundColor =
       this.el.nativeElement.rows[index + 1].style.backgroundColor === 'rgb(165, 214, 167)' ? 'transparent' : 'rgb(165, 214, 167)';
 
-    document.getElementById(this.getItemToCheck(item)).checked = !document.getElementById(this.getItemToCheck(item)).checked;
+    // check and unchecked the checkbox element  
+    this.checkElement = document.getElementById(this.getItemToCheck(item)) as HTMLInputElement;
+    this.checkElement.checked = !this.checkElement.checked
+
     const filter = this.itemsChecked.filter(value => value === this.getItemToCheck(item));
     if (filter.length > 0) {
       const index = this.itemsChecked.indexOf(this.getItemToCheck(item));

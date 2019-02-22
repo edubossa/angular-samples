@@ -9,8 +9,8 @@
   <tbody>
     <tr *ngFor="let item of data; let i = index" (click)="selectItem(item, i)">
       <td *ngIf="hasCheckbox"> 
-        <div class="custom-control custom-checkbox mb-3">
-          <input type="checkbox" class="custom-control-input" id="{{getItemToCheck(item)}}">
+        <div class="custom-control custom-checkbox mb-3" >
+          <input type="checkbox" class="custom-control-input" id="{{getItemToCheck(item)}}" disabled>
           <label class="custom-control-label" for="{{item.id}}">&nbsp;</label> 
         </div>
       </td>
@@ -20,7 +20,7 @@
   </table>
 
   <p class="lead">
-  <a class="btn btn-primary btn-lg" (click)="testData()" href="#" role="button">Test senda data!</a>
+    <button type="button" class="btn btn-primary btn-lg" (click)="testData()"  role="button">Test senda data!</button>
   </p>
 
 </div>
