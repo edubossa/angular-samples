@@ -26,6 +26,9 @@ export class TableComponent implements OnInit {
   @Output()
   lineEvent = new EventEmitter;
 
+  @Output()
+  linesCheckedEvent = new EventEmitter;
+
   columns: TableColumnComponent[] = [];
 
   itemsChecked: any[] = [];
@@ -63,7 +66,7 @@ export class TableComponent implements OnInit {
 
   getThreadClass(): string {
     for (const enumMember in TheadType) {
-      if (this.threadType == enumMember) {
+      if (this.threadType === enumMember) {
         return TheadType[enumMember];
       }
     }
@@ -74,7 +77,7 @@ export class TableComponent implements OnInit {
     this.addItemToCheckList(item, index);
     this.lineEvent.emit(item);
   }
-  
+
   addItemToCheckList(item: any, index) {
 
     if (!this.hasCheckbox) {
@@ -85,9 +88,9 @@ export class TableComponent implements OnInit {
     this.el.nativeElement.rows[index + 1].style.backgroundColor =
       this.el.nativeElement.rows[index + 1].style.backgroundColor === 'rgb(165, 214, 167)' ? 'transparent' : 'rgb(165, 214, 167)';
 
-    // check and unchecked the checkbox element  
+    // check and unchecked the checkbox element
     this.checkElement = document.getElementById(this.getItemToCheck(item)) as HTMLInputElement;
-    this.checkElement.checked = !this.checkElement.checked
+    this.checkElement.checked = !this.checkElement.checked;
 
     const filter = this.itemsChecked.filter(value => value === this.getItemToCheck(item));
     if (filter.length > 0) {
@@ -97,14 +100,12 @@ export class TableComponent implements OnInit {
       this.itemsChecked.push(this.getItemToCheck(item));
     }
 
+    this.linesCheckedEvent.emit(this.itemsChecked);
+
   }
 
   getItemToCheck(item: any) {
     return this.getProperty(item, this.columns[0].property);
-  }
-
-  testData() {
-    console.log('ITEMS CHECKED' + JSON.stringify(this.itemsChecked));
   }
 
 }

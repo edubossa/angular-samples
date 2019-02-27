@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TableComponent } from '../table.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'table-column',
-  templateUrl: './table-column.component.html',
-  styleUrls: ['./table-column.component.css']
+  template: `
+  `,
 })
 export class TableColumnComponent implements OnInit {
 
