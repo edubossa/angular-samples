@@ -1,0 +1,24 @@
+<div class="container">
+  <br />
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{p.id}}</td>
+        <td>{{p.title}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.stock}}</td>
+        <td> <app-stockstatus [productId]='p.id' [stock]='p.stock' (stockValueChange)='ouvindoEvento($event)' ></app-stockstatus> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
