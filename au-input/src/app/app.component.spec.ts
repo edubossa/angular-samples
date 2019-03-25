@@ -9,7 +9,8 @@ describe('AppComponent', () => {
 
   let component: AppComponent,
       fixture: ComponentFixture<AppComponent>,
-      el: DebugElement;
+      el: DebugElement,
+      emailField: DebugElement;
 
 
   beforeEach(async(() => {
@@ -24,6 +25,9 @@ describe('AppComponent', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.debugElement.componentInstance;
     el = fixture.debugElement;
+    emailField = el.query(By.css('#email-field'));
+
+    fixture.detectChanges();
   });
 
   // TODO CONTINUAR AULA 26
@@ -37,9 +41,15 @@ describe('AppComponent', () => {
   });
 
   it('should create a font awesome email input', () => {
-    const emailField = el.query(By.css('#email-field'));
     expect(emailField).toBeTruthy();
-    //expect(emailField.query(By.css('i.icon.fa.fa-envelop'))).toBeTruthy();
+  });
+
+  it('should include the correct email icon inside the email input', () => {
+    console.log(emailField.nativeElement.outerHTML);
+    expect(emailField.query(By.css('i.icon.fa.fa-envelope'))).toBeTruthy(); 
+  });
+
+  it('should have the projected test input inside the email inside', () => {
     expect(emailField.query(By.css('input.test-class'))).toBeTruthy();
   });
 

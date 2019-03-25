@@ -7,13 +7,13 @@ import { InputRefDirective } from '../common/input-ref.directive';
   styleUrls: ['./au-fa-input.component.scss']
 })
 export class AuFaInputComponent implements OnInit, AfterContentInit {
-  
+
   @Input() icon: string;
 
   @ContentChild(InputRefDirective) input: InputRefDirective;
-  
+
   constructor() { }
-  
+
   ngOnInit() {
   }
 
@@ -26,7 +26,7 @@ export class AuFaInputComponent implements OnInit, AfterContentInit {
   @HostBinding('class.wallace-focus')
   get isInputFocus() {
     return this.input ? this.input.focus : false;
-  } 
+  }
 
   get classes() {
 
