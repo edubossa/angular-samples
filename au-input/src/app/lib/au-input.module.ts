@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuFaInputComponent } from './au-fa-input/au-fa-input.component';
 import { InputRefDirective } from './common/input-ref.directive';
 
-
+// Link npm library: https://registry.npmjs.org/ews-au-input
 @NgModule({
     declarations: [
         AuFaInputComponent,
